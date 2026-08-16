@@ -3,11 +3,13 @@ import requests
 import os
 import time
 import threading
+from pathlib import Path
 from dotenv import load_dotenv
 from cvzone.PoseModule import PoseDetector
 
-# I-load ang nakatagong database link
-load_dotenv()
+# I-load ang nakatagong database link mula sa root folder
+ROOT_DIR = Path(__file__).resolve().parent.parent.parent
+load_dotenv(ROOT_DIR / '.env')
 FIREBASE_URL = os.getenv("DATABASE_URL")
 
 # Buksan ang Camera at AI

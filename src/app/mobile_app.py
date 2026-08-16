@@ -3,9 +3,12 @@ import requests
 import time
 import threading
 import os
+from pathlib import Path
 from dotenv import load_dotenv
 
-load_dotenv()
+# Path to the root directory
+ROOT_DIR = Path(__file__).resolve().parent.parent.parent
+load_dotenv(ROOT_DIR / '.env')
 FIREBASE_URL = os.getenv("DATABASE_URL")
 
 # --- MGA STRETCHING EXERCISES ---

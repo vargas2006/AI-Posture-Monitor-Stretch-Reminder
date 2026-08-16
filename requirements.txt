@@ -1,6 +1,0 @@
-opencv-python
-cvzone
-mediapipe
-requests
-python-dotenv
-flet
