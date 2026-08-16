@@ -36,33 +36,30 @@ while True:
             
         cv2.putText(img, f"Ratio: {posture_ratio:.2f}", (50, 100), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
         
-        # -------------------------------------------------------------
-        # ANG BAGONG AUTO-CALIBRATION LOGIC
-        # -------------------------------------------------------------
-        
+
         if baseline_ratio is None:
-            # Kung WALA pang na-save na baseline, pilitin ang user na mag-calibrate
+
             cv2.putText(img, "Umupo ng tuwid at pindutin ang 'c'", (30, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 3)
             
-            # Kapag pinindot ng user ang letter 'c' sa keyboard...
+
             if cv2.waitKey(1) & 0xFF == ord('c'):
-                baseline_ratio = posture_ratio  # I-save kung ano ang ratio niya sa sandaling iyon!
+                baseline_ratio = posture_ratio 
                 print(f"Na-calibrate na! Ang normal mo ay: {baseline_ratio}")
         else:
-            # Kung MAYROON nang baseline, mag-co-compute na tayo
-            limit = baseline_ratio - 0.08  # Ibabawas lang natin ng kaunti para sa limit
+
+            limit = baseline_ratio - 0.08  
             
             if posture_ratio < limit:
-                cv2.putText(img, "NAKA-SLOUCH KA!", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1.5, (0, 0, 255), 4)
+                cv2.putText(img, "PANGET KANA NGA PANGET PA POSTURE MO", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1.5, (0, 0, 255), 4)
             else:
                 cv2.putText(img, "GOOD POSTURE", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1.5, (0, 255, 0), 4)
             
-            # I-display sa screen para alam ng user kung ano ang limit niya
+
             cv2.putText(img, f"Limit mo: {limit:.2f}", (50, 150), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255, 255, 0), 2)
 
     cv2.imshow("Posture AI Monitor", img)
     
-    # Pindutin ang 'q' para mag-exit
+
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
